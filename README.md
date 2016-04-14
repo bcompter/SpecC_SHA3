@@ -10,8 +10,8 @@ The code may be used by executing the program with the message to be hashed as a
 
 The src directory holds the SpecC code and requires a properly configured SpecC development system.  Most computers on the NEU COE server list should be compatible.  
 
-ssh username@gateway.coe.neu.edu
-ssh servername -p 27
-source /ECEnet/Apps1/sce/20121009/bin/setup.sh
+*ssh username@gateway.coe.neu.edu
+*ssh servername -p 27
+*source /ECEnet/Apps1/sce/20121009/bin/setup.sh
 
 After this, then simple invoke make within the src directory to compile the SpecC implementation.
