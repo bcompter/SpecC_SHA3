@@ -12,7 +12,8 @@ int main(int argc, char *argv[]){
   uint8_t *newmessage;
   newmessage=sponge((uint8_t *)argv[1],*psize);
   for(int32_t i=0;i<64;i++){
-    printf("%d %X\n",i,*(newmessage+i));
+    printf("%X",*(newmessage+i));
   }
+  printf("\n");
   return 0;
 }

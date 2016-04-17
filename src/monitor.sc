@@ -9,7 +9,12 @@ behavior Monitor()
 	 */
 	void main (void)
 	{
-	
+		// Receive hashed output
+		// todo
+		
+		// Write to file
+		// todo		
+		
 	}  // end void main void
 	
 };  // end behavior
