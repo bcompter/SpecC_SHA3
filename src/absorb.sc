@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+import "i_receiver";
+import "i_sender";
+
 /**
  * Absorb
  */
-behavior Absorb()
+behavior Absorb(i_receiver dataFromStim, i_sender stateData)
 {
 	/**
 	 * r

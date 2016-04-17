@@ -2,10 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+import "i_sender";
+
 /**
  * Stimulus
  */
-behavior Stimulus()
+behavior Stimulus(i_sender dataToDesign)
 {
 	/**
 	 * Pad input data in preparation
@@ -16,25 +18,25 @@ behavior Stimulus()
   		int32_t newS;
   		uint8_t *nM;
   		
-  		i=*S;
+  		i = *S;
   		newS=(*S+72-(*S%72));
-  		
   		nM=(uint8_t*)malloc(*S+(72-(*S%72)));
-  		/*Copy string*/
-  		for(j=0;j<*S;j++)
+  		
+  		/* Copy string */
+  		for(j=0; j<*S; j++)
   		{
     		*(nM+j)=*(M+j);
   		}
-  		*(nM+i)=0x01;
+  		*(nM+i) = 0x01;
   		i++;
-  		while(i<(newS-1))
+  		while(i < (newS-1))
   		{
-    		*(nM+i)=0x00;
+    		*(nM+i) = 0x00;
     		i++;
   		}
-  		*(nM+i)=0x80;
+  		*(nM+i) = 0x80;
   		i++;
-  		*S=i;
+  		*S = i;
   		return nM;
 	}
 
@@ -59,14 +61,13 @@ behavior Stimulus()
 		// Pad the input if required
 		r=72;
   		w=8;
-  		/*Padding*/
   		if((size%r)!=0)
   		{
     		M=padding(M,&size);
   		}
 		
-		// Send to the design
-		// todo
+		// Send M and size to the design
+		dataToDesign.send(M, size);
 		
 	}  // end void main void
 	

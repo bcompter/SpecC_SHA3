@@ -1,7 +1,9 @@
+import "i_receiver";
+
 /**
  * Monitor
  */
-behavior Monitor()
+behavior Monitor(i_receiver dataFromSqueeze)
 {
 	/**
 	 * Main behavior
@@ -9,7 +11,7 @@ behavior Monitor()
 	 */
 	void main (void)
 	{
-		// Receive hashed output
+		// Receive output
 		// todo
 		
 		// Write to file

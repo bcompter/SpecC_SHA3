@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+import "i_receiver";
+import "i_sender";
+
 /**
  * Squeeze
  */
-behavior Squeeze()
+behavior Squeeze(i_receiver stateData, i_sender dataToMonitor)
 {
 	/**
 	 * Squeeze step of the SHA3 algorithm

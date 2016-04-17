@@ -13,16 +13,23 @@ import "stimulus";
 import "design";
 import "monitor";
 
+import "c_queue";
+
 /**
  * Main application behavior
  * The starting point for our simulation which includes our stimulus, design, and monitor
  */
 behavior Main
 {
+	// Communications
+	const unsigned long qSize = 1024;
+	c_queue dataToDesign(qSize);
+	c_queue dataToMonitor(qSize);
+
 	// Behaviors
-	Stimulus stimulus;
-	Design design;
-	Monitor monitor;
+	Stimulus stimulus(dataToDesign);
+	Design design(dataToDesign, dataToMonitor);
+	Monitor monitor(dataToMonitor);
 
 	// Main application entry point
 	int main(void)
@@ -33,7 +40,7 @@ behavior Main
 			stimulus;
 			design;
 			monitor;
-		};  // end par
+		};
 		
 		return 0;
 		

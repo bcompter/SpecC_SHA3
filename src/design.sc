@@ -1,14 +1,22 @@
 import "absorb";
 import "squeeze";
 
+import "c_queue";
+import "i_receiver";
+import "i_sender";
+
 /**
  * Design
  */
-behavior Design()
+behavior Design(i_receiver dataFromStim, i_sender dataToMonitor)
 {
+	// Communications
+	const unsigned long qSize = 1024;
+	c_queue stateData(qSize);
+	
 	// Behaviors
-	Absorb absorb;
-	Squeeze squeeze;
+	Absorb absorb(dataFromStim, stateData);
+	Squeeze squeeze(stateData, dataToMonitor);
 
 	/**
 	 * Main behavior of our SHA3 algorithm
