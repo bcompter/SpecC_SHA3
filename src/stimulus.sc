@@ -8,7 +8,7 @@ import "i_sender";
 /**
  * Stimulus
  */
-behavior Stimulus(i_sender dataToDesign, bool isDone)
+behavior Stimulus(i_sender dataToDesign, int finalCount)
 {
 	/**
 	 * Pad input data in preparation
@@ -47,13 +47,16 @@ behavior Stimulus(i_sender dataToDesign, bool isDone)
 	 */
 	void main (void)
 	{
-		int32_t size;
+		int32_t size, size2;
 		int32_t r;
   		int32_t w;
   		uint8_t* M;
 		FILE* fp;
 		char strInput [72];
+		int count;
 	
+		count = 0;
+		
 		// Load inputs from file
 		fp = fopen("input.txt", "r");
 		if (fp == NULL)
@@ -65,7 +68,11 @@ behavior Stimulus(i_sender dataToDesign, bool isDone)
 		// Loop through all input strings to hash
 		while((fgets(strInput, 72, fp)) != NULL)
 		{
-			size = strlen(strInput)-1;
+			// Remove newlines and carriage returns
+			strtok(strInput, "\n");
+			strtok(strInput, "\r");
+			
+			size = strlen(strInput);
 			M = (uint8_t*)strInput;
 		
 			// Pad the input if required
@@ -79,10 +86,11 @@ behavior Stimulus(i_sender dataToDesign, bool isDone)
 			// Send M and size to the design
 			printf("STIMULUS::Sending data to design...\n");
 			dataToDesign.send(M, size);
+			count++;
 		}
 		
 		// Send end signal to monitor
-		isDone = true;
+		finalCount = count;
 
 	}  // end void main void
 	

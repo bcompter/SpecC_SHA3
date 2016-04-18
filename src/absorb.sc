@@ -190,6 +190,7 @@ behavior Absorb(i_receiver dataFromStim, i_sender stateData)
 				}
       			
 			}  // end for y
+			
 		}  // end while 1
   		
 	}  // end void main void

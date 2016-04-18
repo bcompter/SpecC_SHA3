@@ -8,7 +8,7 @@ import "i_receiver";
 /**
  * Monitor
  */
-behavior Monitor(i_receiver dataFromSqueeze, bool isDone)
+behavior Monitor(i_receiver dataFromSqueeze, int finalCount)
 {
 	/**
 	 * Main behavior
@@ -16,10 +16,21 @@ behavior Monitor(i_receiver dataFromSqueeze, bool isDone)
 	 */
 	void main (void)
 	{
-		int x, i;
+		FILE* fp;
+		int x, i, count;
 		uint8_t * p;
 		uint64_t Z [8];
-	
+
+		count = 0;
+		
+		// Open output file to hold results
+		fp = fopen("output.txt", "w");
+		if (fp == NULL)
+		{
+			printf("MONITOR::Output file open failed!\n");
+			exit(0);
+		}
+		
 		while (1)
 		{
 			// Receive output
@@ -29,16 +40,19 @@ behavior Monitor(i_receiver dataFromSqueeze, bool isDone)
 				dataFromSqueeze.receive(&Z[x], (int)sizeof(uint64_t));
 			}
 		
-			// Write to file and check our answer
+			// Write to file to check our answer
+			printf("Answer %d: ", count);
 			p = (uint8_t *) &Z;
-			printf("FINAL ANSWER\n");
 			for (i = 0; i < 64; i++)
 			{
+				fprintf(fp, "%02X", p[i]);
 				printf("%02X", p[i]);
 			}
-			printf("\n\n");
+			fprintf(fp, "\n");
+			printf("\n");
+			count++;
 			
-			if (isDone)
+			if (finalCount != 0 && count == finalCount)
 			{
 				exit(0);
 			}

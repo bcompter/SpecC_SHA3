@@ -23,10 +23,16 @@ behavior Squeeze(i_receiver stateData, i_sender dataToMonitor)
 		const int32_t w = 8;
 		int32_t b, x, y;
 		uint64_t Z [8];
-  		b = 0;
   		
 		while (1)
 		{
+			// Initialize data
+			for (x = 0; x < 8; x++)
+			{
+				Z[x] = 0;
+			}
+			b = 0;
+		
 			// Receive State from absorb
 			for(y = 0; y < 5; y++)
 			{
