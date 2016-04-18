@@ -144,50 +144,53 @@ behavior Absorb(i_receiver dataFromStim, i_sender stateData)
 		
 		printf("ABSORB::Starting\n");
 				
-		// Get data from stimulus
-		dataFromStim.receive(&M[0], size);
-  		nM = (uint64_t *)&M[0];
-  		printf("ABSORB::Got data from Stimulus...\n");
+		while (1)
+		{
+			// Get data from stimulus
+			dataFromStim.receive(&M[0], size);
+			nM = (uint64_t *)&M[0];
+			printf("ABSORB::Got data from Stimulus...\n");
   		
-  		/* Initialization */
-  		for(i = 0; i < 5; i++)
-  		{ 
-  			for (ii = 0; ii < 5; ii++)
-  			{
-  				S[i][ii] = 0;
-  			}
-  		}
-  		printf("ABSORB::Done with init\n");
+			/* Initialization */
+			for(i = 0; i < 5; i++)
+			{ 
+				for (ii = 0; ii < 5; ii++)
+				{
+					S[i][ii] = 0;
+				}
+			}
+			printf("ABSORB::Done with init\n");
   		
-  		/* Each block has 72 bytes */
-  		for(i = 0; i < size / ri; i++)
-  		{
-    		for(y = 0; y < 5; y++)
-    		{
-      			for(x = 0; x < 5; x++)
-      			{
-					if((x + 5 * y) < (ri / w))
+			/* Each block has 72 bytes */
+			for(i = 0; i < size / ri; i++)
+			{
+				for(y = 0; y < 5; y++)
+				{
+					for(x = 0; x < 5; x++)
 					{
-	  					S[x][y] = S[x][y] ^ *(nM + i * 9 + x + 5 * y);
-					}
-      			}  // end for x
+						if((x + 5 * y) < (ri / w))
+						{
+							S[x][y] = S[x][y] ^ *(nM + i * 9 + x + 5 * y);
+						}
+					}  // end for x
       			
-    		}  // end for y
+				}  // end for y
 
-    		keccak_f();
+				keccak_f();
     		
-  		}  // end for i
+			}  // end for i
   		
-  		// Send state, S to squeeze behavior
-  		printf("ABSORB::Sending data to squeeze\n");
-  		for(y = 0; y < 5; y++)
-    	{
-      		for(x = 0; x < 5; x++)
-      		{
-				stateData.send(&S[x][y], (int)sizeof(uint64_t));
-      		}
+			// Send state, S to squeeze behavior
+			printf("ABSORB::Sending data to squeeze\n");
+			for(y = 0; y < 5; y++)
+			{
+				for(x = 0; x < 5; x++)
+				{
+					stateData.send(&S[x][y], (int)sizeof(uint64_t));
+				}
       			
-    	}  // end for y
+			}  // end for y
+		}  // end while 1
   		
 	}  // end void main void
 	

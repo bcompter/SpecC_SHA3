@@ -25,15 +25,18 @@ behavior Main
 	const unsigned long qSize = 1024;
 	c_queue dataToDesign(qSize);
 	c_queue dataToMonitor(qSize);
+	bool isDone;
 
 	// Behaviors
-	Stimulus stimulus(dataToDesign);
+	Stimulus stimulus(dataToDesign, isDone);
 	Design design(dataToDesign, dataToMonitor);
-	Monitor monitor(dataToMonitor);
+	Monitor monitor(dataToMonitor, isDone);
 
 	// Main application entry point
 	int main(void)
 	{
+		isDone = false;
+		
 		// Execute all of the following behaviors in parallel
 		par 
 		{
