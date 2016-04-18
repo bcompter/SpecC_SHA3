@@ -8,7 +8,7 @@ Credit to Fackelmann/SHA3 for the reference implementation used to convert.
 The reference code can be compiled simply by using make inside the ref directory.
 The code may be used by executing the program with the message to be hashed as an argument.
 
-The src directory holds the SpecC code and requires a properly configured SpecC development system.  Most computers on the NEU COE server list should be compatible.  
+The src directory holds the SpecC code and requires a properly configured SpecC development system.  Most (but not all) computers on the NEU COE server list should be compatible.  Ergs is confirmed working.  Some workstations are missing a 32 bit gnu header file which throws an error when compiling.
 
 * ssh username@gateway.coe.neu.edu
 * ssh servername -p 27
