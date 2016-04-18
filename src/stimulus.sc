@@ -1,6 +1,7 @@
 #include <inttypes.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 import "i_sender";
 
@@ -61,12 +62,13 @@ behavior Stimulus(i_sender dataToDesign)
 		// Pad the input if required
 		r=72;
   		w=8;
-  		if((size%r)!=0)
+  		if((size%r) != 0)
   		{
-    		M=padding(M,&size);
+    		M = padding(M, &size);
   		}
 		
 		// Send M and size to the design
+		printf("STIMULUS::Sending data to design...\n");
 		dataToDesign.send(M, size);
 		
 	}  // end void main void
