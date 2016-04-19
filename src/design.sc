@@ -29,7 +29,7 @@ behavior Design(i_receiver dataFromStim, i_sender dataToMonitor)
 		{
 			absorb;
 			squeeze;
-		};
+		}
 	
 	}  // end void main void
 	
