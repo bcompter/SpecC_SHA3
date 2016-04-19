@@ -35,7 +35,6 @@ behavior Main
 	// Main application entry point
 	int main(void)
 	{
-		finalCount = 0;
 		
 		// Execute all of the following behaviors in parallel
 		par 
@@ -43,10 +42,8 @@ behavior Main
 			stimulus;
 			design;
 			monitor;
-		};
-		
-		return 0;
-		
+		}
+
 	}  // end int main void
 	
 };  // end behavior
