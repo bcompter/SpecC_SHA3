@@ -14,4 +14,4 @@ The src directory holds the SpecC code and requires a properly configured SpecC 
 * ssh servername -p 27
 * source /ECEnet/Apps1/sce/20121009/bin/setup.sh
 
-After this, then simple invoke make within the src directory to compile the SpecC implementation.
+After this, then simply invoke make within the src directory to compile the SpecC implementation.
